@@ -14,7 +14,7 @@ public class teller {
 		customersHelped = 0;
 	}
 	
-	public void help(customer customer) {
+	public long help(customer customer) {
 		available = false;
 		timeOccupied += customer.getHelpTime();
 		customer.waitTime = System.nanoTime() - customer.startTime; 
@@ -25,6 +25,7 @@ public class teller {
 		}
 		customersHelped++;
 		available = true;
+		return customer.waitTime;
 	}
 	
 	public boolean isAvailable() {
