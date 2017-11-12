@@ -7,10 +7,11 @@ public class customer {
 	int helpTime;
 	long startTime;
 	long waitTime;
+	Random r = new Random();
 	
-	public customer() {
-		startTime = System.nanoTime();
-		Random r = new Random();
+	public customer(long currentTime) {
+		startTime = currentTime;
+		
 		helpTime = r.nextInt(5) + 2; 
 	}
 	

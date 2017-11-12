@@ -15,11 +15,11 @@ public class teller {
 		customersHelped = 0;
 	}
 	
-	public long help(customer customer) {
+	public long help(customer customer, long currentTime) {
 		available = false;
 		timeOccupied += customer.helpTime;
-		customer.waitTime = System.nanoTime() - customer.startTime; 
-		nextAvailable = System.nanoTime() + ((long)customer.getHelpTime() * 1000000000);
+		customer.waitTime = currentTime - customer.startTime; 
+		nextAvailable = currentTime + ((long)customer.getHelpTime() * 1000000000);
 		customersHelped++;
 		return customer.waitTime;
 	}

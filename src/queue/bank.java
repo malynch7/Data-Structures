@@ -8,43 +8,47 @@ public class bank {
 		
 		String restart = "y";
 		Scanner input = new Scanner(System.in);
+		Random r = new Random();
+		
 		while (!restart.equals("n")) {
-			int numberOfCustomers = 5;
-			long totalWaitTime = 0;
+			
 			teller[] tellers = new teller[5];
 			Queue<customer> line = new LinkedList<customer>();
+			int numberOfCustomers = 5;
+			long totalWaitTime = 0;
+			long elapsedTime;
+			long nextArrival = (1000000000 * (long)(r.nextInt(5) + 2));
+			long currentTime = System.nanoTime();
+			long startTime = currentTime;
+			long lastArrival = startTime;
+			
 			for (int i = 0; i < 5; i++) {
 				tellers[i] = new teller();
-				line.add(new customer());
+				line.add(new customer(currentTime));
 			}
-			Random r = new Random();
 			System.out.print("\nBeginning simulation...\n\n120s remaining\n");
-			long startTime = System.nanoTime();
-			long nextArrival = (1000000000 * (long)(r.nextInt(5) + 2));
-			long lastArrival = startTime;
-			long elapsedTime;
-			while((elapsedTime = System.nanoTime() - startTime)/1000000000 < 120) {
+			while((elapsedTime = (currentTime = System.nanoTime()) - startTime)/1000000000 < 120) {
 				if (elapsedTime / 10 % (1000000000)  == 0)
 					System.out.println((120 - (elapsedTime/1000000000)) + "s remaining ");
-				if(System.nanoTime() > lastArrival + nextArrival ) {
-					lastArrival = System.nanoTime();
-					line.add(new customer());
+				if(currentTime > lastArrival + nextArrival ) {
+					lastArrival = currentTime;
+					line.add(new customer(currentTime));
 					numberOfCustomers++;
 					nextArrival = 1000000000 * (r.nextInt(5) + 2);
 				}
 				for (int i = 0; i < 5; i++) {
 					if(tellers[i].isAvailable()) {
 						if (!line.isEmpty())
-							totalWaitTime += tellers[i].help(line.poll());
+							totalWaitTime += tellers[i].help(line.poll(), currentTime);
 					}else{
-						if (System.nanoTime() >= tellers[i].nextAvailable) {
+						if (currentTime >= tellers[i].nextAvailable) {
 							tellers[i].available = true;
 						}
 												}
 				}
 				
 				}
-				System.out.println("\n\nSimulation complete. \n\nTotal number of customers: " + numberOfCustomers + "\nAverage wait time: " + (totalWaitTime / 1000000000 /numberOfCustomers) + "s");
+				System.out.println("\n\nSimulation complete. \n\nTotal number of customers: " + numberOfCustomers + "\nAverage wait time: " + (totalWaitTime / (numberOfCustomers - 5) / 1000000000 ) + "s");
 				for (int i = 0; i < 5; i++) {
 					System.out.println("teller " + (i + 1) + " helped " + tellers[i].customersHelped + " customers, and was occupied for " + tellers[i].timeOccupied + "s.");
 				}
