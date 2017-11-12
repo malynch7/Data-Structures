@@ -10,7 +10,7 @@ public class bank {
 		Scanner input = new Scanner(System.in);
 		while (!restart.equals("n")) {
 			int numberOfCustomers = 5;
-			double totalWaitTime = 0;
+			long totalWaitTime = 0;
 			teller[] tellers = new teller[5];
 			Queue<customer> line = new LinkedList<customer>();
 			for (int i = 0; i < 5; i++) {
@@ -18,13 +18,14 @@ public class bank {
 				line.add(new customer());
 			}
 			Random r = new Random();
-			System.out.println("\nBeginning Simulation...");
-			double startTime = System.nanoTime();
-			double nextArrival = 1000000000 * (r.nextInt(5) + 2);
-			double lastArrival = startTime;
-			
-			while((System.nanoTime() - startTime)/1000000000 < 120) {
-				System.out.println("elapsed time: " + (System.nanoTime() - startTime));
+			System.out.print("\nBeginning simulation...\n\n120s remaining\n");
+			long startTime = System.nanoTime();
+			long nextArrival = (1000000000 * (long)(r.nextInt(5) + 2));
+			long lastArrival = startTime;
+			long elapsedTime;
+			while((elapsedTime = System.nanoTime() - startTime)/1000000000 < 120) {
+				if (elapsedTime / 10 % (1000000000)  == 0)
+					System.out.println((120 - (elapsedTime/1000000000)) + "s remaining ");
 				if(System.nanoTime() > lastArrival + nextArrival ) {
 					lastArrival = System.nanoTime();
 					line.add(new customer());
@@ -33,17 +34,23 @@ public class bank {
 				}
 				for (int i = 0; i < 5; i++) {
 					if(tellers[i].isAvailable()) {
-						totalWaitTime += tellers[i].help(line.poll());
-					}
+						if (!line.isEmpty())
+							totalWaitTime += tellers[i].help(line.poll());
+					}else{
+						if (System.nanoTime() >= tellers[i].nextAvailable) {
+							tellers[i].available = true;
+						}
+												}
 				}
-				System.out.println("Simulation conplete. \nTotal number of customers: " + numberOfCustomers);
+				
+				}
+				System.out.println("\n\nSimulation complete. \n\nTotal number of customers: " + numberOfCustomers + "\nAverage wait time: " + (totalWaitTime / 1000000000 /numberOfCustomers) + "s");
 				for (int i = 0; i < 5; i++) {
 					System.out.println("teller " + (i + 1) + " helped " + tellers[i].customersHelped + " customers, and was occupied for " + tellers[i].timeOccupied + "s.");
 				}
-				System.out.println(line.size() + " customers did not see a teller");
-			}
-			System.out.println("Restart simulation (y/n)?");
-			restart = input.next();
+				System.out.println(line.size() + " customers did not see a teller.\n");
+				System.out.println("Restart simulation (y/n)?");
+				restart = input.next();
 		}
 	}
 

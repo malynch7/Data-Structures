@@ -6,7 +6,8 @@ public class teller {
 
 	boolean available;
 	int customersHelped;
-	int timeOccupied;
+	int timeOccupied = 0;
+	long nextAvailable;
 	
 	
 	public teller() {
@@ -16,15 +17,10 @@ public class teller {
 	
 	public long help(customer customer) {
 		available = false;
-		timeOccupied += customer.getHelpTime();
+		timeOccupied += customer.helpTime;
 		customer.waitTime = System.nanoTime() - customer.startTime; 
-		try{
-			TimeUnit.SECONDS.sleep(customer.getHelpTime());
-		}catch(InterruptedException ie) {
-			
-		}
+		nextAvailable = System.nanoTime() + ((long)customer.getHelpTime() * 1000000000);
 		customersHelped++;
-		available = true;
 		return customer.waitTime;
 	}
 	
