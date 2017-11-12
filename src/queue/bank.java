@@ -41,20 +41,16 @@ public class bank {
 						if (!line.isEmpty())
 							totalWaitTime += tellers[i].help(line.poll(), currentTime);
 					}else{
-						if (currentTime >= tellers[i].nextAvailable) {
+						if (currentTime >= tellers[i].nextAvailable) 
 							tellers[i].available = true;
-						}
-												}
 				}
-				
-				}
-				System.out.println("\n\nSimulation complete. \n\nTotal number of customers: " + numberOfCustomers + "\nAverage wait time: " + (totalWaitTime / (numberOfCustomers - 5) / 1000000000 ) + "s");
-				for (int i = 0; i < 5; i++) {
-					System.out.println("teller " + (i + 1) + " helped " + tellers[i].customersHelped + " customers, and was occupied for " + tellers[i].timeOccupied + "s.");
-				}
-				System.out.println(line.size() + " customers did not see a teller.\n");
-				System.out.println("Restart simulation (y/n)?");
-				restart = input.next();
+			}
+			System.out.println("\n\nSimulation complete. \n\nTotal number of customers: " + numberOfCustomers + "\nAverage wait time: " + (totalWaitTime / (numberOfCustomers - 5) / 1000000000 ) + "s");
+			for (int i = 0; i < 5; i++) 
+				System.out.println("teller " + (i + 1) + " helped " + tellers[i].customersHelped + " customers, and was occupied for " + tellers[i].timeOccupied + "s.");
+			System.out.println(line.size() + " customers did not see a teller.\n");
+			System.out.println("Restart simulation (y/n)?");
+			restart = input.next();
 		}
 	}
 
