@@ -51,7 +51,7 @@ public class bank {
 			System.out.println(line.size() + " customers did not see a teller.\n");
 			System.out.println("Restart simulation (y/n)?");
 			restart = input.next();
+			}
 		}
 	}
-
 }
