@@ -6,7 +6,7 @@ public class bank {
 
 	public static void main(String[] args) {
 		
-		String restart = "y";
+		String restart = " ";
 		Scanner input = new Scanner(System.in);
 		while (!restart.equals("n")) {
 			int numberOfCustomers = 5;
