@@ -14,7 +14,7 @@ public class customer {
 	public customer() {
 	//default constructor
 		startTime = System.nanoTime();
-		helpTime = r.nextInt(5) + 2; 
+		helpTime = r.nextInt(4) + 2; 
 	}
 	
 	public customer(long currentTime) {
@@ -22,7 +22,7 @@ public class customer {
 	 * Pre: currentTime must be initialized.
 	 * Post: customer contains start time and help time*/
 		startTime = currentTime;
-		helpTime = r.nextInt(5) + 2; 
+		helpTime = r.nextInt(4) + 2; 
 	}
 	
 	public int getHelpTime() {
