@@ -176,8 +176,6 @@ public class calc {
 		expression = expression.replaceAll("\\s","");
 		int leftParentheses = 0;
 		for(int i = 0 ; i < expression.length() ; i++ ) {
-			//
-			System.out.println("i: " + i);
 			if(operands.indexOf(expression.charAt(i)) < 2 ) {
 				if(operators.indexOf(expression.charAt(i)) > 1 ){
 					if(i == 0 || i == expression.length()-1) {
