@@ -9,8 +9,10 @@ public class pawn extends piece {
 		name = 'P';
 	}
 	
-	boolean isValidMove(int activeRow, int activeCol, int potentialRow, int potentialCol) {
-		if (activeRow == potentialRow && ((potentialRow - potentialCol) == 1 || ((potentialRow - potentialCol) == 2 && firstMove == false))) {
+	boolean isValidMove(char owner, int activeRow, int activeCol, int potentialRow, int potentialCol) {
+		if (owner == 'w' && activeRow == potentialRow && ((potentialCol - activeCol) == 1 || ((potentialCol - activeCol) == 2 && firstMove == true))) {
+			return true;
+		}else if (owner == 'b' && activeRow == potentialRow && ((potentialCol - activeCol) == -1 || ((potentialCol - activeCol) == -2 && firstMove == true))){
 			return true;
 		}else {
 			return false;

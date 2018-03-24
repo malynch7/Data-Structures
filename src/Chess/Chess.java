@@ -34,12 +34,16 @@ public class Chess {
 					activeCol = (int) (activeLocation.charAt(1) - '1');
 					
 					if(activeRow >= 0 && activeRow < 9 && activeCol >= 0 && activeCol < 9) {
-						activePiece = board.board[activeRow][activeCol];
-						if(activePiece.owner == player) {
-							valid = true;
+						if (board.board[activeRow][activeCol] != null) {
+							activePiece = board.board[activeRow][activeCol];
+							if(activePiece.owner == player) {
+								valid = true;
 							
-						}else {
+							}else {
 							System.out.println("That is not your piece...");
+							}
+						}else {
+							System.out.println("There's no piece there.");
 						}
 					}else {
 						System.out.println("That's not on the board");
@@ -56,8 +60,14 @@ public class Chess {
 					if (activePiece.isValidMove(activeRow, activeCol, potentialRow, potentialCol)){
 						if(board.board[potentialRow][potentialCol] == null || board.board[potentialRow][potentialCol].owner != player) {
 							valid = true;
+						}else {
+							System.out.println("You may not capture a piece that belongs to you.");
 						}
+					}else {
+						System.out.println("Invalid move");
 					}
+				}else {
+					System.out.println("That's not on the board");
 				}
 			}while (valid == false);
 			
