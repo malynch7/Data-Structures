@@ -39,10 +39,10 @@ public class Chess {
 							valid = true;
 							
 						}else {
-							System.out.println("That is not your piece...");
+							System.out.println("That is not your piece...\n");
 						}
 					}else {
-						System.out.println("That's not on the board");
+						System.out.println("That's not on the board\n");
 					}
 				}while (valid == false);
 				
@@ -52,15 +52,28 @@ public class Chess {
 				potentialRow = (int) (potentialLocation.charAt(0) - 'A');
 				potentialCol = (int) (potentialLocation.charAt(1) - '1');
 				
-				if (potentialRow >= 0 && potentialRow < 9 && potentialCol >= 0 && potentialCol < 9) {
-					if (activePiece.isValidMove(activeRow, activeCol, potentialRow, potentialCol)){
-						if(board.board[potentialRow][potentialCol] == null || board.board[potentialRow][potentialCol].owner != player) {
+				if (potentialRow >= 0 && potentialRow < 9 && potentialCol >= 0 && potentialCol < 9) { //check that coordinates are on the board
+					if (activePiece.isValidMove(board,activeRow, activeCol, potentialRow, potentialCol)){ //check that move is valid for given piece
+						if(board.board[potentialRow][potentialCol] == null || board.board[potentialRow][potentialCol].owner != player) { // check that destination is not occupied by player's piece
 							valid = true;
+							if (board.board[potentialRow][potentialCol] != null && board.board[potentialRow][potentialCol].name == 'K') { //check for king capture
+								checkmate = true;
+							}
+						}else {
+							System.out.println("You may not capture your own piece\n");
 						}
+					}else {
+						System.out.println("Invalid Move\n");
 					}
+				}else {
+					System.out.println("That's not on the board\n");
 				}
 			}while (valid == false);
 			
+			//perform move
+			if(activePiece.name == 'P') {
+				activePiece.firstMove = false;
+			}
 			board.board[potentialRow][potentialCol] = board.board[activeRow][activeCol];
 			board.board[activeRow][activeCol] = null;
 			
