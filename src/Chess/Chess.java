@@ -47,7 +47,6 @@ public class Chess {
 						}
 					}else {
 						System.out.println("That's not on the board");
-					}n("That's not on the board\n");
 					}
 				}while (valid == false);
 				
