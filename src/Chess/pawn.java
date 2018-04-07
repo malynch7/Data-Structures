@@ -1,5 +1,7 @@
 package Chess;
 
+import java.util.*;
+
 public class pawn extends piece {
 	
 	public pawn(char owner) {
@@ -8,20 +10,37 @@ public class pawn extends piece {
 	}
 	
 	boolean isValidMove(board board, int activeRow, int activeCol, int potentialRow, int potentialCol) {
-		//white pawn path
-		if (owner == 'w' && activeRow == potentialRow && ((potentialCol - activeCol) == 1 || ((potentialCol - activeCol) == 2 && firstMove == true))) {
-			//ensure no piece is in the path
-			if ((potentialCol - activeCol) == 2 && board.board[activeRow][activeCol + 1] != null) {
-				return false;
+		
+		if (owner == 'w') {
+			if(activeRow == potentialRow) {
+				if((potentialCol - activeCol) == 1 && board.board[potentialRow][potentialCol] == null) {
+					return true;
+				}else if((potentialCol - activeCol) == 2 && firstMove == true) {
+					if (board.board[potentialRow][potentialCol] == null && board.board[potentialRow][potentialCol - 1] == null) {
+						return true;
+					}
+				}
+			//capture condition	
+			}else if (potentialCol - activeCol == 1 && Math.abs(potentialRow - activeRow) == 1) {
+				if(board.board[potentialRow][potentialCol] != null) {
+					return true;
+				}
 			}
-			return true;
-			//black pawn path	
-		}else if (owner == 'b' && activeRow == potentialRow && ((potentialCol - activeCol) == -1 || ((potentialCol - activeCol) == -2 && firstMove == true))) {
-			//ensure no piece is in the path
-			if ((potentialCol - activeCol) == -2 && board.board[activeRow][activeCol - 1] != null) {
-				return false;
+		}else if (owner == 'b') {
+			if(activeRow == potentialRow) {
+				if((potentialCol - activeCol) == -1 && board.board[potentialRow][potentialCol] == null) {
+					return true;
+				}else if((potentialCol - activeCol) == -2 && firstMove == true) {
+					if (board.board[potentialRow][potentialCol] == null && board.board[potentialRow][potentialCol + 1] == null) {
+						return true;
+					}
+				}
+			//capture condition	
+			}else if (potentialCol - activeCol == -1 && Math.abs(potentialRow - activeRow) == 1) {
+				if(board.board[potentialRow][potentialCol] != null) {
+					return true;
+				}
 			}
-			return true;
 		}
 		return false;
 	}	

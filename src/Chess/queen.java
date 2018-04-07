@@ -22,7 +22,7 @@ public class queen extends piece{
 				}
 			}
 			return true;
-		}else if (activeCol == activeCol) {
+		}else if (activeCol == potentialCol) {
 			if(activeRow < potentialRow) {
 				for (int i = activeRow + 1; i < potentialRow; i++) {
 					if(board.board[i][activeCol] != null) {

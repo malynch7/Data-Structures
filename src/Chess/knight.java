@@ -5,7 +5,7 @@ import java.util.*;
 public class knight extends piece{
 	public knight(char owner) {
 		this.owner = owner;
-		name = 'K';
+		name = 'k';
 	}
 
 	public boolean isValidMove(board board,int activeRow, int activeCol, int potentialRow, int potentialCol) {
