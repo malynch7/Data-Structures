@@ -39,19 +39,15 @@ public class Chess {
 							if(activePiece.owner == player) {
 								valid = true;
 							
-<<<<<<< HEAD
-						}else {
-							System.out.println("That is not your piece...\n");
-=======
 							}else {
 							System.out.println("That is not your piece...");
 							}
 						}else {
 							System.out.println("There's no piece there.");
->>>>>>> branch 'master' of https://github.com/malynch7/Data-Structures.git
 						}
 					}else {
-						System.out.println("That's not on the board\n");
+						System.out.println("That's not on the board");
+					}n("That's not on the board\n");
 					}
 				}while (valid == false);
 				
@@ -65,30 +61,17 @@ public class Chess {
 					if (activePiece.isValidMove(board,activeRow, activeCol, potentialRow, potentialCol)){ //check that move is valid for given piece and board configuration
 						if(board.board[potentialRow][potentialCol] == null || board.board[potentialRow][potentialCol].owner != player) { // check that destination is not occupied by player's piece
 							valid = true;
-<<<<<<< HEAD
 							if (board.board[potentialRow][potentialCol] != null && board.board[potentialRow][potentialCol].name == 'K') { //check for king capture
 								checkmate = true;
 							}
 						}else {
 							System.out.println("You may not capture your own piece\n");
-=======
-						}else {
-							System.out.println("You may not capture a piece that belongs to you.");
->>>>>>> branch 'master' of https://github.com/malynch7/Data-Structures.git
 						}
 					}else {
-<<<<<<< HEAD
 						System.out.println("Invalid Move\n");
-=======
-						System.out.println("Invalid move");
->>>>>>> branch 'master' of https://github.com/malynch7/Data-Structures.git
 					}
 				}else {
-<<<<<<< HEAD
 					System.out.println("That's not on the board\n");
-=======
-					System.out.println("That's not on the board");
->>>>>>> branch 'master' of https://github.com/malynch7/Data-Structures.git
 				}
 			}while (valid == false);
 			
