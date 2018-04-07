@@ -10,14 +10,14 @@ public class bishop extends piece{
 		if (Math.abs(potentialRow - activeRow) == Math.abs(potentialCol - activeCol)) {
 			if (activeRow < potentialRow) {
 				if (activeCol < potentialCol) {
-					for (int i = activeRow, j = activeCol; i < potentialRow; i++,j++ ) {
+					for (int i = activeRow + 1, j = activeCol + 1; i < potentialRow; i++,j++ ) {
 						if(board.board[i][j] != null) {
 							return false;
 						}
 					}
 					return true;
 				}else {
-					for (int i = activeRow, j = activeCol; i < potentialRow; i++,j-- ) {
+					for (int i = activeRow + 1, j = activeCol - 1; i < potentialRow; i++,j-- ) {
 						if(board.board[i][j] != null) {
 							return false;
 						}
@@ -26,14 +26,14 @@ public class bishop extends piece{
 				}
 			}else { //activeRow > potentialRow
 				if (activeCol < potentialCol) {
-					for (int i = activeRow, j = activeCol; i > potentialRow; i--,j++ ) {
+					for (int i = activeRow - 1, j = activeCol + 1; i > potentialRow; i--,j++ ) {
 						if(board.board[i][j] != null) {
 							return false;
 						}
 					}
 					return true;
 				}else {
-					for (int i = activeRow, j = activeCol; i > potentialRow; i--,j-- ) {
+					for (int i = activeRow - 1, j = activeCol - 1; i > potentialRow; i--,j-- ) {
 						if(board.board[i][j] != null) {
 							return false;
 						}
