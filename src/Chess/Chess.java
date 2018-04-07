@@ -53,7 +53,7 @@ public class Chess {
 				potentialCol = (int) (potentialLocation.charAt(1) - '1');
 				
 				if (potentialRow >= 0 && potentialRow < 9 && potentialCol >= 0 && potentialCol < 9) { //check that coordinates are on the board
-					if (activePiece.isValidMove(board,activeRow, activeCol, potentialRow, potentialCol)){ //check that move is valid for given piece
+					if (activePiece.isValidMove(board,activeRow, activeCol, potentialRow, potentialCol)){ //check that move is valid for given piece and board configuration
 						if(board.board[potentialRow][potentialCol] == null || board.board[potentialRow][potentialCol].owner != player) { // check that destination is not occupied by player's piece
 							valid = true;
 							if (board.board[potentialRow][potentialCol] != null && board.board[potentialRow][potentialCol].name == 'K') { //check for king capture
