@@ -29,7 +29,7 @@ public class board {
 	void display() {
 		System.out.println("     1    2    3    4    5    6    7    8 \n  -----------------------------------------");
 		for (int i = 0; i < 8; i++) {
-			System.out.print((char) ('A' + i) + " ");
+			System.out.print((char)('A' + i) + " ");
 			for (int j = 0; j < 8; j++){
 				if (board[i][j] != null) {
 					System.out.print("| " + board[i][j].name + board[i][j].owner + ' ');
@@ -38,8 +38,9 @@ public class board {
 				}
 
 			}
-			System.out.println("|\n  -----------------------------------------");
+			System.out.println("| " + (char)('A' + i) + "\n  -----------------------------------------");
 		}
+		System.out.println("     1    2    3    4    5    6    7    8\n\n\n\n\n");
 
 	}
 }

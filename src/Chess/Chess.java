@@ -19,6 +19,11 @@ public class Chess {
 			turn++;
 			do {
 				valid = false;
+				//clear screen
+				for (int clear = 0; clear < 25; clear++) {
+					System.out.println();
+				}
+				
 				board.display();
 				do {
 					if (turn % 2 == 1) {
@@ -84,7 +89,9 @@ public class Chess {
 			board.board[potentialRow][potentialCol] = board.board[activeRow][activeCol];
 			board.board[activeRow][activeCol] = null;
 			
+
 		}while (checkmate == false);
-			
+		
+		System.out.println("     !!!!!WINNER!!!!!     ");
 	}
 }
